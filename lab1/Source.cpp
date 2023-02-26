@@ -12,26 +12,47 @@ bool isPrime(int n)
 		if ((n % tr) == 0)
 			return false;
 	return true;
-
 }
 
-struct
+struct prop
+{
+	int length;
+	char *cuv;
+};
+
+int afis_bubbleSort(int counter, prop sentence[200])
+{
+	int ultim = counter, lng;
+	while (ultim > 0)
+	{
+		lng = ultim - 1;
+		ultim = 0;
+		for (int index = 0; index < lng; ++index) {
+			if (sentence[index].length < sentence[index + 1].length)
+			{
+				swap(sentence[index], sentence[index + 1]);
+				ultim = index + 1;
+			}
+			if (sentence[index].length == sentence[index + 1].length)
+			{
+
+				if (strcmp(sentence[index].cuv, sentence[index + 1].cuv) == 1)
+				{
+					swap(sentence[index], sentence[index + 1]);
+					ultim = index + 1;
+				}
+
+			}
+		}
+	}
+	for (int index = 0; index < counter; ++index)
+	{
+		printf("%s\n", sentence[index].cuv);
+	}
+}
 
 int main()
 {
-	//Exemplificare printf
-	printf("-----------------[EXEMPLU CU PRINTF]------------------------\n");
-	int a = 123;
-	printf("Valoare lui a este: %d\n", a);
-	char c = 123;
-	printf("Valoarea lui c (char) este: %c\n", c);
-	printf("Valoarea numerica a lui c este: %d\n", c);
-	char sir[20] = "ana are mere\0";
-	printf("Sirul meu are valoarea: %s\n", sir);
-	printf("-----------------------------------------------------");
-	printf("\n\n");
-
-
 	printf("-----------------[PROBLEMA 1]------------------------\n");
 	FILE* fp;
 	int index, nr, suma = 0;
@@ -42,25 +63,18 @@ int main()
 	else {
 		printf("Am deschis fisierul cu success!\n");
 		char myString[200];
-		/*
-		if (fgets(myString, 200, fp))
-		{
-			printf("Am citit din fisier: %s\n", myString);
-		}
-		*/
-		
+
 		while (fgets(myString, 200, fp))//citeste un rand din fisier si il pune in charul myString
 		{
-			myString[strlen(myString)-1] = '\0';
+			myString[strlen(myString) - 1] = '\0';
 			printf("Am citit din fisier: %s\n", myString);
 
 			nr = 0, index = 0;
 			while (index < strlen(myString))
 			{
-				nr = nr*10 + (myString[index] - '0');
+				nr = nr * 10 + (myString[index] - '0');
 				index++;
 			}
-			printf("-Nr meu este %d\n\n", nr);
 
 			suma += nr;
 		}
@@ -70,25 +84,24 @@ int main()
 	printf("\n\n");
 
 	printf("-----------------[PROBLEMA 2]------------------------\n");
-	
+
+	printf("Introduceti numarul de cuvinte din propozitie: ");
+	int numarCuvinte;
+	scanf_s("%d", &numarCuvinte, 4);
 	printf("Introduceti o propozitie: ");
-	char vectCuvinte[50][200], sentence[200];
-	scanf_s("%200s", sentence);
-	//scanf("%19s", cuvant);
-	int counter = 0, numarCuvinte = 0;
-	while (scanf_s("%200s", vectCuvinte[counter]))
+	char cuvant[20];
+	int counter = 0;
+	prop sentence[200];
+	while (scanf_s("%19s", cuvant, 19))
 	{
-		//if (strcmp(cuvant, "\n\n") == 0)
-		//	break;
-
-		numarCuvinte++;
-
-		printf("Cuvantul citit este: %s\n", vectCuvinte[counter]);
-		counter++;
-
-		//if (counter >= numarCuvinte)
-			//break;
+		sentence[counter].cuv = _strdup(cuvant);//aloca dinamic
+		sentence[counter++].length = strlen(cuvant);
+		printf("Cuvantul citit este: %s\n", cuvant);
+		if (counter >= numarCuvinte) break;
 	}
+	
+	cout << afis_bubbleSort(counter, sentence);
+
 	printf("-----------------------------------------------------");
 	printf("\n\n");
 
