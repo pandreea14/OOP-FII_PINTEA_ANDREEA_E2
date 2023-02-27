@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <string.h>
 
-void Student::setName(char* input_name)
+void Student::setName(const char* input_name)
 {
 	this->Name = input_name;
 }
@@ -22,7 +22,7 @@ void Student::setHistoryGrade(float input_grade)
 	this->HistoryGrade = input_grade;
 }
 
-char* Student::getName()
+const char* Student::getName()
 {
 	return this->Name;
 }
@@ -42,7 +42,7 @@ float Student::getHistoryGrade()
 	return this->HistoryGrade;
 }
 
-float Student::averageGrade()
+float Student::getaverageGrade()
 {
 	return (this->MathGrade + this->EnglishGrade + this->HistoryGrade) / 3;
 }

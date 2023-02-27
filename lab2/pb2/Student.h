@@ -1,18 +1,19 @@
 #pragma once
 class Student
 {
-	char* Name;
+private:
+	const char* Name;
 	float MathGrade, EnglishGrade, HistoryGrade;
 public:
-	void setName(char* input_name);
+	void setName(const char* input_name);
 	void setMathGrade(float input_grade);
 	void setEnglishGrade(float input_grade);
 	void setHistoryGrade(float input_grade);
 
-	char* getName();
+	const char* getName();
 	float getMathGrade();
 	float getEnglishGrade();
 	float getHistoryGrade();
-	float averageGrade();
+	float getaverageGrade();
 };
 
