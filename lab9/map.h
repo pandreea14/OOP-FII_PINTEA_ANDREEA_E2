@@ -154,7 +154,6 @@ public:
 			currentIndex++;
 			return pairs[currentIndex - 1].value;
 		}
-		throw "Map is full";
 	}
 
 
